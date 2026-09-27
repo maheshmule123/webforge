@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WebForge - Completed Projects</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#07111f;
+    color:#f8fafc;
+    overflow-x:hidden;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.25;
+    animation:moveGlow 9s ease-in-out infinite;
+}
+
+.glow.one{
+    width:350px;
+    height:350px;
+    background:#06b6d4;
+    top:-120px;
+    left:-100px;
+}
+
+.glow.two{
+    width:320px;
+    height:320px;
+    background:#22c55e;
+    right:-100px;
+    bottom:-120px;
+    animation-delay:2s;
+}
+
+@keyframes moveGlow{
+    0%,100%{
+        transform:translate(0,0);
+    }
+    50%{
+        transform:translate(25px,-20px);
+    }
+}
+
+.topbar{
+    width:100%;
+    padding:22px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-size:22px;
+    font-weight:800;
+}
+
+.logoBox{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#06b6d4,#22c55e);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:20px;
+    box-shadow:0 8px 25px rgba(6,182,212,.25);
+}
+
+.backBtn{
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    color:#e2e8f0;
+    padding:11px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.backBtn:hover{
+    background:rgba(255,255,255,.12);
+    transform:translateY(-2px);
+}
+
+.container{
+    width:86%;
+    max-width:1150px;
+    margin:55px auto 70px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:35px;
+    animation:fadeDown .7s ease;
+}
+
+.heading .smallTitle{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:20px;
+    background:rgba(34,197,94,.1);
+    color:#4ade80;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.heading h1{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.heading p{
+    color:#94a3b8;
+    font-size:15px;
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.addBox{
+    background:rgba(15,29,48,.88);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:35px;
+    box-shadow:0 20px 45px rgba(0,0,0,.22);
+}
+
+.addBox h2{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.formGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.inputGroup{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.inputGroup label{
+    color:#cbd5e1;
+    font-size:13px;
+    font-weight:600;
+}
+
+.inputGroup input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    color:white;
+    outline:none;
+    font-size:14px;
+}
+
+.inputGroup input:focus{
+    border-color:#06b6d4;
+    box-shadow:0 0 0 3px rgba(6,182,212,.08);
+}
+
+.inputGroup input::placeholder{
+    color:#64748b;
+}
+
+.addBtn{
+    margin-top:18px;
+    border:none;
+    padding:13px 22px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#06b6d4,#22c55e);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.addBtn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(6,182,212,.2);
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.projectCard{
+    position:relative;
+    background:rgba(15,29,48,.88);
+    border:1px solid rgba(148,163,184,.12);
+    border-radius:22px;
+    padding:27px;
+    overflow:hidden;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+    transition:.4s;
+    animation:cardShow .7s ease both;
+}
+
+.projectCard::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:#06b6d4;
+    filter:blur(70px);
+    opacity:.12;
+    top:-60px;
+    right:-50px;
+}
+
+.projectCard:hover{
+    transform:translateY(-8px);
+    border-color:rgba(34,197,94,.3);
+    box-shadow:0 25px 55px rgba(0,0,0,.35);
+}
+
+@keyframes cardShow{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.projectIcon{
+    width:58px;
+    height:58px;
+    border-radius:17px;
+    background:linear-gradient(135deg,rgba(6,182,212,.16),rgba(34,197,94,.14));
+    border:1px solid rgba(34,197,94,.16);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:22px;
+}
+
+.projectCard h2{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.clientName{
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:23px;
+}
+
+.details{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.detail{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.detailIcon{
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    background:rgba(255,255,255,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.websiteLink{
+    color:#67e8f9;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.cardButtons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.viewBtn,
+.editBtn,
+.deleteBtn{
+    border:none;
+    padding:12px;
+    border-radius:11px;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.viewBtn{
+    background:linear-gradient(135deg,#06b6d4,#22c55e);
+}
+
+.editBtn{
+    background:#334155;
+}
+
+.deleteBtn{
+    background:#7f1d1d;
+    grid-column:1 / -1;
+}
+
+.viewBtn:hover,
+.editBtn:hover,
+.deleteBtn:hover{
+    transform:translateY(-2px);
+}
+
+.empty{
+    grid-column:1 / -1;
+    text-align:center;
+    padding:60px 20px;
+    background:rgba(15,29,48,.8);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+}
+
+.emptyIcon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.empty h2{
+    margin-bottom:10px;
+}
+
+.empty p{
+    color:#94a3b8;
+}
+
+@media(max-width:650px){
+
+    .topbar{
+        padding:18px 5%;
+    }
+
+    .container{
+        width:90%;
+        margin-top:40px;
+    }
+
+    .heading h1{
+        font-size:32px;
+    }
+
+    .formGrid{
+        grid-template-columns:1fr;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<header class="topbar">
+
+    <div class="logo">
+        <div class="logoBox">W</div>
+        <span>WebForge</span>
+    </div>
+
+    <button class="backBtn" onclick="goDashboard()">
+        ← Dashboard
+    </button>
+
+</header>
+
+<main class="container">
+
+    <section class="heading">
+
+        <div class="smallTitle">
+            WEBFORGE WORK
+        </div>
+
+        <h1>Completed Projects</h1>
+
+        <p>
+            Websites successfully designed and developed by WebForge.
+        </p>
+
+    </section>
+
+    <section class="addBox">
+
+        <h2>Add Completed Project</h2>
+
+        <div class="formGrid">
+
+            <div class="inputGroup">
+                <label>Client Name</label>
+                <input
+                    type="text"
+                    id="clientName"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="inputGroup">
+                <label>Client Project Name</label>
+                <input
+                    type="text"
+                    id="projectName"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="inputGroup">
+                <label>Website Link</label>
+                <input
+                    type="url"
+                    id="websiteLink"
+                    autocomplete="off"
+                >
+            </div>
+
+        </div>
+
+        <button
+            class="addBtn"
+            onclick="saveProject()"
+            id="saveBtn">
+            + Add Project
+        </button>
+
+    </section>
+
+    <section class="projects" id="projectsContainer"></section>
+
+</main>
+
+<script>
+
+let projects =
+JSON.parse(
+    localStorage.getItem("webforgeCompletedProjects") || "[]"
+);
+
+let editingIndex = -1;
+
+function saveProject(){
+
+    const clientName =
+    document.getElementById("clientName").value.trim();
+
+    const projectName =
+    document.getElementById("projectName").value.trim();
+
+    const websiteLink =
+    document.getElementById("websiteLink").value.trim();
+
+    if(!clientName || !projectName || !websiteLink){
+
+        alert("Please fill Client Name, Project Name and Website Link.");
+
+        return;
+    }
+
+    const project = {
+        clientName:clientName,
+        projectName:projectName,
+        websiteLink:websiteLink,
+        icon:"🌐"
+    };
+
+    if(editingIndex === -1){
+
+        projects.push(project);
+
+    }else{
+
+        projects[editingIndex] = project;
+        editingIndex = -1;
+
+        document.getElementById("saveBtn").textContent =
+        "+ Add Project";
+    }
+
+    localStorage.setItem(
+        "webforgeCompletedProjects",
+        JSON.stringify(projects)
+    );
+
+    clearForm();
+    displayProjects();
+
+}
+
+function displayProjects(){
+
+    const container =
+    document.getElementById("projectsContainer");
+
+    container.innerHTML="";
+
+    if(projects.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <div class="emptyIcon">💼</div>
+
+                <h2>No Completed Projects Yet</h2>
+
+                <p>
+                    Add your completed WebForge projects above.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    projects.forEach(function(project,index){
+
+        const card =
+        document.createElement("article");
+
+        card.className="projectCard";
+
+        card.style.animationDelay =
+        (index * 0.08) + "s";
+
+        card.innerHTML = `
+
+            <div class="projectIcon">
+                ${project.icon || "🌐"}
+            </div>
+
+            <h2>
+                ${escapeHTML(project.projectName)}
+            </h2>
+
+            <div class="clientName">
+                Client: ${escapeHTML(project.clientName)}
+            </div>
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <div class="detailIcon">
+                        👤
+                    </div>
+
+                    <span>
+                        ${escapeHTML(project.clientName)}
+                    </span>
+
+                </div>
+
+                <div class="detail">
+
+                    <div class="detailIcon">
+                        🔗
+                    </div>
+
+                    <span class="websiteLink">
+                        ${escapeHTML(project.websiteLink)}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="cardButtons">
+
+                <button
+                    class="viewBtn"
+                    onclick="openWebsite(${index})">
+                    View Website →
+                </button>
+
+                <button
+                    class="editBtn"
+                    onclick="editProject(${index})">
+                    Edit
+                </button>
+
+                <button
+                    class="deleteBtn"
+                    onclick="deleteProject(${index})">
+                    Delete Project
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+}
+
+function editProject(index){
+
+    const project = projects[index];
+
+    document.getElementById("clientName").value =
+    project.clientName;
+
+    document.getElementById("projectName").value =
+    project.projectName;
+
+    document.getElementById("websiteLink").value =
+    project.websiteLink;
+
+    editingIndex = index;
+
+    document.getElementById("saveBtn").textContent =
+    "Save Changes";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+function deleteProject(index){
+
+    const confirmDelete =
+    confirm("Are you sure you want to delete this project?");
+
+    if(!confirmDelete){
+        return;
+    }
+
+    projects.splice(index,1);
+
+    localStorage.setItem(
+        "webforgeCompletedProjects",
+        JSON.stringify(projects)
+    );
+
+    displayProjects();
+
+}
+
+function openWebsite(index){
+
+    let link = projects[index].websiteLink;
+
+    if(
+        !link.startsWith("http://") &&
+        !link.startsWith("https://")
+    ){
+
+        link = "https://" + link;
+
+    }
+
+    window.open(
+        link,
+        "_blank"
+    );
+
+}
+
+function clearForm(){
+
+    document.getElementById("clientName").value="";
+    document.getElementById("projectName").value="";
+    document.getElementById("websiteLink").value="";
+
+}
+
+function goDashboard(){
+
+    window.location.href="dashboard.html";
+
+}
+
+function escapeHTML(value){
+
+    return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+displayProjects();
+
+</script>
+
+</body>
+</html>

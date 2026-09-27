@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WebForge — Project Request</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+background:
+radial-gradient(circle at 10% 10%,#fff7ed 0,#fff1e6 38%,#f3e9ff 100%);
+color:#171225;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+width:300px;
+height:300px;
+border-radius:50%;
+background:rgba(249,115,22,.10);
+top:-100px;
+right:-90px;
+filter:blur(25px);
+animation:floatOne 7s ease-in-out infinite;
+pointer-events:none;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:260px;
+height:260px;
+border-radius:50%;
+background:rgba(139,92,246,.09);
+bottom:-100px;
+left:-80px;
+filter:blur(25px);
+animation:floatTwo 8s ease-in-out infinite;
+pointer-events:none;
+}
+
+@keyframes floatOne{
+0%,100%{transform:translate(0,0)}
+50%{transform:translate(-25px,25px)}
+}
+
+@keyframes floatTwo{
+0%,100%{transform:translate(0,0)}
+50%{transform:translate(25px,-20px)}
+}
+
+.top{
+width:min(1050px,92%);
+margin:22px auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+animation:slideDown .7s ease both;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:800;
+}
+
+.logo b{
+width:42px;
+height:42px;
+background:#5b21b6;
+color:white;
+border-radius:14px;
+display:grid;
+place-items:center;
+box-shadow:0 8px 20px rgba(91,33,182,.2);
+}
+
+.back{
+border:1px solid rgba(23,18,37,.1);
+background:rgba(255,255,255,.8);
+padding:11px 17px;
+border-radius:13px;
+font-weight:700;
+cursor:pointer;
+transition:.25s;
+}
+
+.back:hover{
+transform:translateX(-3px);
+box-shadow:0 8px 20px rgba(50,30,70,.1);
+}
+
+@keyframes slideDown{
+from{
+opacity:0;
+transform:translateY(-18px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.wrap{
+width:min(900px,92%);
+margin:48px auto 70px;
+}
+
+.eyebrow{
+font-size:11px;
+letter-spacing:3px;
+font-weight:800;
+color:#8b5cf6;
+animation:fadeUp .6s ease both;
+}
+
+h1{
+font-size:46px;
+letter-spacing:-2px;
+margin:10px 0;
+animation:fadeUp .6s .1s ease both;
+}
+
+.sub{
+color:#6b6475;
+margin-bottom:30px;
+animation:fadeUp .6s .2s ease both;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card{
+background:rgba(255,255,255,.78);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.85);
+border-radius:28px;
+padding:30px;
+box-shadow:0 20px 55px rgba(65,40,90,.12);
+animation:cardIn .7s .3s ease both;
+}
+
+@keyframes cardIn{
+from{
+opacity:0;
+transform:translateY(25px) scale(.98);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+.form-icon{
+width:58px;
+height:58px;
+border-radius:18px;
+background:#5b21b6;
+color:white;
+display:grid;
+place-items:center;
+font-size:25px;
+margin-bottom:22px;
+box-shadow:0 10px 25px rgba(91,33,182,.2);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:17px;
+}
+
+.field{
+margin-bottom:16px;
+}
+
+label{
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:14px;
+border:1px solid #ddd6e7;
+border-radius:13px;
+background:rgba(255,255,255,.9);
+outline:none;
+font:inherit;
+color:#171225;
+transition:.25s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#8b5cf6;
+box-shadow:0 0 0 4px rgba(139,92,246,.10);
+}
+
+textarea{
+min-height:125px;
+resize:vertical;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+.primary{
+border:0;
+background:#5b21b6;
+color:white;
+padding:14px 22px;
+border-radius:13px;
+font-weight:800;
+cursor:pointer;
+transition:.25s;
+}
+
+.primary:hover{
+transform:translateY(-2px);
+background:#4c1d95;
+box-shadow:0 10px 24px rgba(91,33,182,.22);
+}
+
+.primary:disabled{
+opacity:.7;
+cursor:not-allowed;
+transform:none;
+}
+
+.note{
+margin-top:15px;
+font-size:12px;
+color:#777080;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+
+h1{
+font-size:37px;
+}
+
+.card{
+padding:22px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="top">
+
+<div class="logo">
+<b>📋</b>
+<span>WebForge</span>
+</div>
+
+<button class="back" onclick="location.href='dashboard.html'">
+← Dashboard
+</button>
+
+</header>
+
+<main class="wrap">
+
+<div class="eyebrow">
+WEBFORGE PROJECT REQUEST
+</div>
+
+<h1>Create Your Project Request</h1>
+
+<p class="sub">
+Tell us about your project, requirements, budget and expected timeline.
+</p>
+
+<div class="card">
+
+<div class="form-icon">
+🚀
+</div>
+
+<form id="requestForm">
+
+<div class="grid">
+
+<div class="field">
+<label>Client Name</label>
+
+<input
+type="text"
+name="clientName"
+placeholder="Enter your name"
+required>
+
+</div>
+
+<div class="field">
+<label>Email / Mobile</label>
+
+<input
+type="text"
+name="contact"
+placeholder="Email or mobile number"
+required>
+
+</div>
+
+<div class="field">
+<label>Project Name</label>
+
+<input
+type="text"
+name="projectName"
+placeholder="Enter project name"
+required>
+
+</div>
+
+<div class="field">
+<label>Budget</label>
+
+<input
+type="number"
+name="budget"
+min="5000"
+placeholder="Minimum ₹5,000"
+required>
+
+</div>
+
+<div class="field">
+
+<label>Timeline</label>
+
+<select name="timeline" required>
+
+<option value="">
+Select Timeline
+</option>
+
+<option value="1 Week">
+1 Week
+</option>
+
+<option value="2 Weeks">
+2 Weeks
+</option>
+
+<option value="3 Weeks">
+3 Weeks
+</option>
+
+<option value="4+ Weeks">
+4+ Weeks
+</option>
+
+</select>
+
+</div>
+
+<div class="field">
+
+<label>Expected Delivery</label>
+
+<input
+type="date"
+name="delivery"
+id="delivery"
+required>
+
+</div>
+
+<div class="field full">
+
+<label>Requirement</label>
+
+<input
+type="text"
+name="requirement"
+placeholder="What type of website do you need?"
+required>
+
+</div>
+
+<div class="field full">
+
+<label>Project Description</label>
+
+<textarea
+name="description"
+placeholder="Explain your project requirements..."
+required></textarea>
+
+</div>
+
+</div>
+
+<button
+class="primary"
+type="submit"
+id="submitBtn">
+
+Submit Project Request →
+
+</button>
+
+<p class="note">
+Minimum project budget is ₹5,000 and minimum timeline is 1 week.
+</p>
+
+</form>
+
+</div>
+
+</main>
+
+<script>
+
+const API_URL =
+"https://6cmkqxcivc.execute-api.ap-south-1.amazonaws.com/prod/request";
+
+
+const delivery =
+document.getElementById("delivery");
+
+const today =
+new Date();
+
+today.setDate(
+today.getDate() + 7
+);
+
+delivery.min =
+today.toISOString().split("T")[0];
+
+
+document
+.getElementById("requestForm")
+.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const form =
+this;
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+
+const data =
+Object.fromEntries(
+new FormData(form).entries()
+);
+
+
+if(Number(data.budget) < 5000){
+
+alert("Minimum budget is ₹5,000.");
+
+return;
+
+}
+
+
+submitBtn.disabled = true;
+
+submitBtn.textContent =
+"Submitting...";
+
+
+const apiData = {
+
+clientName:
+data.clientName,
+
+email:
+data.contact,
+
+contact:
+data.contact,
+
+websiteType:
+data.requirement,
+
+services:
+data.projectName,
+
+description:
+data.description,
+
+budget:
+data.budget,
+
+timeline:
+data.timeline,
+
+referenceWebsite:
+"",
+
+requestDate:
+new Date().toISOString()
+
+};
+
+
+try{
+
+const response =
+await fetch(
+API_URL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify(apiData)
+}
+);
+
+
+const result =
+await response.json();
+
+
+console.log(
+"API Response:",
+result
+);
+
+
+if(response.ok){
+
+alert(
+"Project request submitted successfully!"
+);
+
+form.reset();
+
+window.location.href =
+"dashboard.html";
+
+}
+
+else{
+
+alert(
+"Request failed: " +
+(result.message ||
+"Something went wrong.")
+);
+
+submitBtn.disabled = false;
+
+submitBtn.textContent =
+"Submit Project Request →";
+
+}
+
+}
+
+catch(error){
+
+console.error(
+"API Error:",
+error
+);
+
+alert(
+"Unable to connect to WebForge server. Please try again."
+);
+
+submitBtn.disabled = false;
+
+submitBtn.textContent =
+"Submit Project Request →";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

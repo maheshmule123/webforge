@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebForge | Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#080c18;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    background:#6c3cff;
+    filter:blur(150px);
+    opacity:.16;
+    top:-170px;
+    left:-120px;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#00d9ff;
+    filter:blur(150px);
+    opacity:.10;
+    right:-160px;
+    bottom:-140px;
+    z-index:-1;
+}
+
+nav{
+    width:100%;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(8,12,24,.65);
+    backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:23px;
+    font-weight:800;
+}
+
+.logo-box{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6c3cff,#00d9ff);
+    font-size:20px;
+    font-weight:900;
+    box-shadow:0 0 25px rgba(0,217,255,.22);
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.notification-wrapper{
+    position:relative;
+}
+
+.notification{
+    position:relative;
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.04);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:19px;
+}
+
+.notification:hover{
+    transform:translateY(-2px);
+    border-color:rgba(0,217,255,.35);
+    background:rgba(0,217,255,.07);
+}
+
+.notification-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    min-width:18px;
+    height:18px;
+    padding:0 4px;
+    border-radius:20px;
+    background:#ff416c;
+    color:#fff;
+    font-size:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+
+.notification-count.hidden{
+    display:none;
+}
+
+.notification-popup{
+    position:absolute;
+    top:53px;
+    right:0;
+    width:340px;
+    max-width:calc(100vw - 30px);
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(15,20,36,.97);
+    backdrop-filter:blur(20px);
+    border-radius:17px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    overflow:hidden;
+    display:none;
+    z-index:500;
+}
+
+.notification-popup.show{
+    display:block;
+    animation:notificationOpen .2s ease;
+}
+
+@keyframes notificationOpen{
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.notification-header{
+    padding:17px 18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.notification-header h3{
+    font-size:16px;
+}
+
+.notification-header span{
+    color:#8defff;
+    font-size:11px;
+}
+
+.notification-body{
+    max-height:330px;
+    overflow-y:auto;
+}
+
+.notification-item{
+    padding:15px 18px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.notification-item:hover{
+    background:rgba(255,255,255,.04);
+}
+
+.notification-item:last-child{
+    border-bottom:none;
+}
+
+.notification-item-title{
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.notification-item-text{
+    color:#9da7ba;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.notification-item-status{
+    display:inline-block;
+    margin-top:8px;
+    padding:4px 8px;
+    border-radius:20px;
+    background:rgba(0,217,255,.10);
+    color:#8defff;
+    font-size:10px;
+    font-weight:700;
+}
+
+.notification-empty{
+    padding:30px 18px;
+    text-align:center;
+    color:#858fa3;
+    font-size:13px;
+}
+
+.notification-footer{
+    padding:12px 18px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.view-requests-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:9px;
+    background:rgba(0,217,255,.08);
+    border:1px solid rgba(0,217,255,.18);
+    color:#8defff;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.logout-btn{
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    color:#fff;
+    padding:11px 19px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:rgba(255,65,108,.10);
+    border-color:rgba(255,65,108,.35);
+    transform:translateY(-2px);
+}
+
+.main{
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+    padding:65px 6% 60px;
+}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    margin-bottom:65px;
+}
+
+.hero-text{
+    max-width:680px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border-radius:30px;
+    background:rgba(0,217,255,.05);
+    border:1px solid rgba(0,217,255,.18);
+    color:#8defff;
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.badge-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#00e5ff;
+    box-shadow:0 0 12px #00e5ff;
+}
+
+.hero h1{
+    font-size:clamp(38px,5vw,62px);
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#8b6cff,#00d9ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#9da7ba;
+    font-size:16px;
+    line-height:1.7;
+    max-width:600px;
+}
+
+.hero-visual{
+    width:240px;
+    height:240px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.ring{
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(0,217,255,.18);
+}
+
+.ring.one{
+    width:230px;
+    height:230px;
+    animation:spin 16s linear infinite;
+}
+
+.ring.two{
+    width:175px;
+    height:175px;
+    border-color:rgba(108,60,255,.25);
+    animation:spinReverse 11s linear infinite;
+}
+
+.ring.three{
+    width:125px;
+    height:125px;
+    border-color:rgba(0,217,255,.25);
+    animation:spin 8s linear infinite;
+}
+
+.center-logo{
+    width:70px;
+    height:70px;
+    border-radius:21px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6c3cff,#00d9ff);
+    font-size:32px;
+    font-weight:900;
+    box-shadow:0 0 30px rgba(0,217,255,.25),0 0 60px rgba(108,60,255,.18);
+    z-index:2;
+}
+
+@keyframes spin{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+
+@keyframes spinReverse{
+    from{transform:rotate(360deg)}
+    to{transform:rotate(0deg)}
+}
+
+.modules-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.modules-title h2{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.modules-title p{
+    color:#7f899d;
+    font-size:14px;
+}
+
+.modules{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.module{
+    position:relative;
+    min-height:220px;
+    padding:28px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(15px);
+    text-decoration:none;
+    color:#fff;
+    overflow:hidden;
+    transition:.35s ease;
+    cursor:pointer;
+}
+
+.module::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    background:#6c3cff;
+    filter:blur(70px);
+    opacity:0;
+    top:-60px;
+    right:-40px;
+    transition:.35s;
+}
+
+.module:hover{
+    transform:translateY(-8px);
+    border-color:rgba(0,217,255,.25);
+    background:rgba(255,255,255,.055);
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+
+.module:hover::before{
+    opacity:.20;
+}
+
+.module-icon{
+    width:55px;
+    height:55px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    background:linear-gradient(135deg,rgba(108,60,255,.20),rgba(0,217,255,.10));
+    border:1px solid rgba(255,255,255,.08);
+    margin-bottom:24px;
+}
+
+.module h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.module p{
+    color:#858fa3;
+    font-size:14px;
+    line-height:1.6;
+    max-width:310px;
+}
+
+.module-arrow{
+    position:absolute;
+    right:25px;
+    bottom:24px;
+    color:#00d9ff;
+    font-size:20px;
+    transition:.3s;
+}
+
+.module:hover .module-arrow{
+    transform:translateX(5px);
+}
+
+.request-panel{
+    margin-top:40px;
+    display:none;
+    padding:28px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(15px);
+}
+
+.request-panel.show{
+    display:block;
+}
+
+.request-panel h2{
+    margin-bottom:8px;
+}
+
+.request-panel-sub{
+    color:#858fa3;
+    font-size:14px;
+    margin-bottom:22px;
+}
+
+.request-list{
+    display:grid;
+    gap:14px;
+}
+
+.request-card{
+    padding:20px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.035);
+}
+
+.request-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:12px;
+}
+
+.request-name{
+    font-size:17px;
+    font-weight:700;
+}
+
+.request-status{
+    padding:5px 10px;
+    border-radius:20px;
+    background:rgba(0,217,255,.10);
+    color:#8defff;
+    font-size:11px;
+    font-weight:700;
+}
+
+.request-info{
+    color:#9da7ba;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.request-description{
+    margin-top:10px;
+    color:#d5d9e2;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.no-request{
+    color:#858fa3;
+    text-align:center;
+    padding:25px;
+}
+
+.loading{
+    color:#8defff;
+    text-align:center;
+    padding:25px;
+}
+
+.cta{
+    margin-top:55px;
+    padding:35px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(135deg,rgba(108,60,255,.09),rgba(0,217,255,.04));
+    text-align:center;
+}
+
+.cta h2{
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.cta p{
+    color:#858fa3;
+    margin-bottom:22px;
+    line-height:1.6;
+}
+
+.cta-btn{
+    display:inline-block;
+    padding:13px 23px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#6c3cff,#00bce9);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s;
+}
+
+.cta-btn:hover{
+    transform:translateY(-3px);
+}
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    padding:14px 19px;
+    border-radius:12px;
+    background:#151b2d;
+    border:1px solid rgba(255,255,255,.10);
+    color:#fff;
+    font-size:14px;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.35s;
+    z-index:999;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+@media(max-width:950px){
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-text{
+        margin:auto;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .modules{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    nav{
+        padding:15px 5%;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .logo-box{
+        width:36px;
+        height:36px;
+        border-radius:10px;
+    }
+
+    .logout-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+    .notification{
+        width:38px;
+        height:38px;
+    }
+
+    .notification-popup{
+        right:-45px;
+        width:320px;
+    }
+
+    .main{
+        padding:45px 5% 45px;
+    }
+
+    .hero{
+        margin-bottom:50px;
+    }
+
+    .hero h1{
+        font-size:39px;
+    }
+
+    .hero-visual{
+        width:200px;
+        height:200px;
+    }
+
+    .ring.one{
+        width:195px;
+        height:195px;
+    }
+
+    .ring.two{
+        width:150px;
+        height:150px;
+    }
+
+    .ring.three{
+        width:105px;
+        height:105px;
+    }
+
+    .modules{
+        grid-template-columns:1fr;
+    }
+
+    .module{
+        min-height:190px;
+    }
+
+    .cta{
+        padding:28px 20px;
+    }
+
+    .request-top{
+        flex-direction:column;
+    }
+
+    .toast{
+        left:18px;
+        right:18px;
+        bottom:18px;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <div class="logo-box">W</div>
+        WebForge
+    </div>
+
+    <div class="nav-right">
+
+        <div class="notification-wrapper">
+
+            <div class="notification"
+                 onclick="showNotifications()"
+                 title="Notifications">
+
+                🔔
+
+                <span class="notification-count hidden"
+                      id="notificationCount">0</span>
+
+            </div>
+
+            <div class="notification-popup"
+                 id="notificationPopup">
+
+                <div class="notification-header">
+                    <h3>Notifications</h3>
+
+                    <span id="notificationHeaderCount">
+                        No new requests
+                    </span>
+                </div>
+
+                <div class="notification-body"
+                     id="notificationBody">
+
+                    <div class="notification-empty">
+                        Loading notifications...
+                    </div>
+
+                </div>
+
+                <div class="notification-footer">
+
+                    <button class="view-requests-btn"
+                            onclick="viewAllRequests()">
+                        View All Project Requests
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="logout-btn"
+                onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+</nav>
+
+<main class="main">
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                WebForge Workspace
+            </div>
+
+            <h1>
+                Welcome to your
+                <span class="gradient-text">
+                    Workspace.
+                </span>
+            </h1>
+
+            <p>
+                Manage your services, project requests, completed
+                projects and client workflow from one place.
+            </p>
+
+        </div>
+
+        <div class="hero-visual">
+
+            <div class="ring one"></div>
+            <div class="ring two"></div>
+            <div class="ring three"></div>
+
+            <div class="center-logo">
+                W
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="modules-title">
+
+            <h2>WebForge Modules</h2>
+
+            <p>
+                Select a module to continue
+            </p>
+
+        </div>
+
+        <div class="modules">
+
+            <a href="services.html"
+               class="module">
+
+                <div class="module-icon">
+                    🛠️
+                </div>
+
+                <h3>
+                    Services
+                </h3>
+
+                <p>
+                    Explore the professional services offered
+                    by WebForge.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+            <a href="request.html"
+               class="module">
+
+                <div class="module-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Create Your Project
+                </h3>
+
+                <p>
+                    Submit your project requirements and
+                    request a website or digital solution.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+            <a href="project.html"
+               class="module">
+
+                <div class="module-icon">
+                    📁
+                </div>
+
+                <h3>
+                    My Projects
+                </h3>
+
+                <p>
+                    View completed client projects and
+                    their live website links.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+            <a href="process.html"
+               class="module">
+
+                <div class="module-icon">
+                    🔄
+                </div>
+
+                <h3>
+                    Work Process
+                </h3>
+
+                <p>
+                    Understand how WebForge handles projects
+                    from request to final delivery.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+            <a href="hire.html"
+               class="module">
+
+                <div class="module-icon">
+                    👨‍💻
+                </div>
+
+                <h3>
+                    Hire Me
+                </h3>
+
+                <p>
+                    View professional profile information
+                    and connect for your next project.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+            <a href="request.html"
+               class="module">
+
+                <div class="module-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Start a Project
+                </h3>
+
+                <p>
+                    Have an idea? Start your project request
+                    with WebForge today.
+                </p>
+
+                <span class="module-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <section class="request-panel"
+             id="requestPanel">
+
+        <h2>
+            Project Requests
+        </h2>
+
+        <p class="request-panel-sub">
+            Requests received through WebForge
+        </p>
+
+        <div class="request-list"
+             id="requestList">
+
+            <div class="loading">
+                Loading project requests...
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="cta">
+
+        <h2>
+            Ready to Build Something?
+        </h2>
+
+        <p>
+            Turn your idea into a professional digital
+            experience with WebForge.
+        </p>
+
+        <a href="request.html"
+           class="cta-btn">
+            Create Project Request →
+        </a>
+
+    </section>
+
+</main>
+
+<div class="toast"
+     id="toast"></div>
+
+<script>
+const API_URL="https://6cmkqxcivc.execute-api.ap-south-1.amazonaws.com/prod/request";
+
+let projectRequests=[];
+
+async function loadProjectRequests(){
+
+    const requestList=document.getElementById("requestList");
+    const notificationBody=document.getElementById("notificationBody");
+
+    try{
+
+        const response=await fetch(API_URL,{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        const result=await response.json();
+
+        console.log("AWS GET Response:",result);
+
+        let data=result;
+
+        if(result && typeof result.body==="string"){
+
+            try{
+                data=JSON.parse(result.body);
+            }catch(error){
+                console.error("Response body parse error:",error);
+            }
+        }
+
+        if(data && Array.isArray(data.requests)){
+
+            projectRequests=data.requests;
+
+        }else if(data && Array.isArray(data.Items)){
+
+            projectRequests=data.Items;
+
+        }else if(Array.isArray(data)){
+
+            projectRequests=data;
+
+        }else{
+
+            projectRequests=[];
+        }
+
+        renderRequests();
+        renderNotifications();
+        updateNotificationCount();
+
+    }catch(error){
+
+        console.error("AWS Request Error:",error);
+
+        if(requestList){
+
+            requestList.innerHTML=

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WebForge Freelancing</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#080c18;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    background:#6c3cff;
+    filter:blur(150px);
+    opacity:.18;
+    top:-150px;
+    left:-120px;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#00d9ff;
+    filter:blur(150px);
+    opacity:.12;
+    right:-150px;
+    bottom:-120px;
+    z-index:-1;
+}
+
+/* Navbar */
+
+nav{
+    width:100%;
+    padding:22px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.logo-box{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6c3cff,#00d9ff);
+    font-size:21px;
+    font-weight:900;
+    box-shadow:0 0 25px rgba(0,217,255,.25);
+}
+
+.nav-buttons{
+    display:flex;
+    gap:12px;
+}
+
+.btn{
+    padding:11px 20px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.login{
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.04);
+}
+
+.register{
+    color:#fff;
+    background:linear-gradient(135deg,#6c3cff,#00aeea);
+    box-shadow:0 8px 25px rgba(91,60,255,.25);
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Hero */
+
+.hero{
+    min-height:570px;
+    padding:80px 7% 60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border:1px solid rgba(0,217,255,.2);
+    background:rgba(0,217,255,.05);
+    border-radius:30px;
+    color:#8defff;
+    font-size:13px;
+    margin-bottom:24px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#00e5ff;
+    box-shadow:0 0 12px #00e5ff;
+}
+
+h1{
+    font-size:clamp(42px,6vw,72px);
+    line-height:1.02;
+    letter-spacing:-2px;
+    margin-bottom:25px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#8b6cff,#00d9ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#aab2c5;
+    font-size:17px;
+    line-height:1.7;
+    max-width:590px;
+    margin-bottom:32px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    padding:14px 24px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#6c3cff,#00bce9);
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow:0 10px 30px rgba(90,70,255,.25);
+    transition:.3s;
+}
+
+.secondary-btn{
+    padding:14px 24px;
+    border-radius:12px;
+    color:#fff;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.04);
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Hero Visual */
+
+.hero-visual{
+    width:330px;
+    height:330px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.ring{
+    position:absolute;
+    border:1px solid rgba(0,217,255,.18);
+    border-radius:50%;
+}
+
+.ring.one{
+    width:320px;
+    height:320px;
+    animation:spin 18s linear infinite;
+}
+
+.ring.two{
+    width:250px;
+    height:250px;
+    border-color:rgba(108,60,255,.25);
+    animation:spinReverse 13s linear infinite;
+}
+
+.ring.three{
+    width:180px;
+    height:180px;
+    border-color:rgba(0,217,255,.25);
+    animation:spin 9s linear infinite;
+}
+
+.center-logo{
+    width:95px;
+    height:95px;
+    border-radius:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6c3cff,#00d9ff);
+    font-size:45px;
+    font-weight:900;
+    box-shadow:
+        0 0 35px rgba(0,217,255,.25),
+        0 0 70px rgba(108,60,255,.15);
+    z-index:2;
+}
+
+@keyframes spin{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+
+@keyframes spinReverse{
+    from{transform:rotate(360deg)}
+    to{transform:rotate(0deg)}
+}
+
+/* About */
+
+.about{
+    padding:70px 7%;
+    text-align:center;
+}
+
+.section-title{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.section-subtitle{
+    color:#8e98ad;
+    max-width:650px;
+    margin:0 auto 40px;
+    line-height:1.6;
+}
+
+.about-box{
+    max-width:900px;
+    margin:auto;
+    padding:32px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(15px);
+    text-align:left;
+}
+
+.about-box h3{
+    font-size:23px;
+    margin-bottom:14px;
+}
+
+.about-box p{
+    color:#aab2c5;
+    line-height:1.7;
+}
+
+/* Services */
+
+.services{
+    padding:70px 7%;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.service-card{
+    padding:26px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.035);
+    transition:.35s;
+}
+
+.service-card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(0,217,255,.25);
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:18px;
+}
+
+.service-card h3{
+    font-size:18px;
+    margin-bottom:9px;
+}
+
+.service-card p{
+    color:#8993a8;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* CTA */
+
+.cta{
+    padding:80px 7%;
+}
+
+.cta-box{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+    padding:55px 25px;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.09);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(108,60,255,.10),
+            rgba(0,217,255,.06)
+        );
+}
+
+.cta-box h2{
+    font-size:36px;
+    margin-bottom:14px;
+}
+
+.cta-box p{
+    color:#929caf;
+    margin-bottom:28px;
+}
+
+/* Footer */
+
+footer{
+    padding:30px 7%;
+    border-top:1px solid rgba(255,255,255,.07);
+    text-align:center;
+    color:#697386;
+    font-size:13px;
+}
+
+/* Responsive */
+
+@media(max-width:850px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:60px;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        width:280px;
+        height:280px;
+    }
+
+    .ring.one{
+        width:270px;
+        height:270px;
+    }
+
+    .ring.two{
+        width:215px;
+        height:215px;
+    }
+
+    .ring.three{
+        width:155px;
+        height:155px;
+    }
+
+    .service-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:560px){
+
+    nav{
+        padding:18px 5%;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .logo-box{
+        width:37px;
+        height:37px;
+    }
+
+    .nav-buttons .btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+    .hero{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about,
+    .services,
+    .cta{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .section-title{
+        font-size:29px;
+    }
+
+    .cta-box h2{
+        font-size:29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        <div class="logo-box">W</div>
+        WebForge
+    </div>
+
+    <div class="nav-buttons">
+        <a href="login.html" class="btn login">
+            Login
+        </a>
+
+        <a href="register.html" class="btn register">
+            Register
+        </a>
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            <span class="dot"></span>
+            Modern Freelancing Platform
+        </div>
+
+        <h1>
+            Build Your
+            <span class="gradient-text">
+                Digital Presence.
+            </span>
+        </h1>
+
+        <p>
+            WebForge Freelancing helps individuals, businesses and
+            professionals create modern, professional and
+            user-friendly digital solutions.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="register.html" class="primary-btn">
+                Get Started →
+            </a>
+
+            <a href="services.html" class="secondary-btn">
+                Explore Services
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="ring one"></div>
+        <div class="ring two"></div>
+        <div class="ring three"></div>
+
+        <div class="center-logo">
+            W
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="about">
+
+    <h2 class="section-title">
+        About WebForge
+    </h2>
+
+    <p class="section-subtitle">
+        Turning ideas into modern digital experiences.
+    </p>
+
+    <div class="about-box">
+
+        <h3>
+            What is WebForge?
+        </h3>
+
+        <p>
+            WebForge is a modern freelancing platform focused on
+            creating professional websites and digital solutions
+            for individuals, businesses, shops, coaching classes,
+            restaurants and personal brands.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="services">
+
+    <h2
+        class="section-title"
+        style="text-align:center;"
+    >
+        What We Build
+    </h2>
+
+    <p class="section-subtitle">
+        Professional solutions designed according to your needs.
+    </p>
+
+
+    <div class="service-grid">
+
+        <div class="service-card">
+
+            <div class="icon">🎓</div>
+
+            <h3>
+                Final Year Project
+            </h3>
+
+            <p>
+                Modern web-based projects for students and
+                academic requirements.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">💻</div>
+
+            <h3>
+                Website Development
+            </h3>
+
+            <p>
+                Responsive and professional websites with modern UI
+                and smooth user experience.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🏢</div>
+
+            <h3>
+                Business Website
+            </h3>
+
+            <p>
+                Digital websites for businesses, shops and
+                growing brands.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">👨‍💻</div>
+
+            <h3>
+                Portfolio Website
+            </h3>
+
+            <p>
+                Professional portfolio websites to showcase skills,
+                projects and achievements.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">📚</div>
+
+            <h3>
+                Coaching Website
+            </h3>
+
+            <p>
+                Websites for coaching classes, institutes and
+                educational services.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🍽️</div>
+
+            <h3>
+                Restaurant Website
+            </h3>
+
+            <p>
+                Attractive restaurant websites to showcase menus,
+                services and contact information.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta">
+
+    <div class="cta-box">
+
+        <h2>
+            Have an Idea?
+        </h2>
+
+        <p>
+            Let's turn your idea into a professional digital
+            experience with WebForge.
+        </p>
+
+        <a
+            href="register.html"
+            class="primary-btn"
+        >
+            Start Your Project →
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    © 2026 WebForge Freelancing. All Rights Reserved.
+
+</footer>
+
+</body>
+</html>

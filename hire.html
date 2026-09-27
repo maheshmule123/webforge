@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hire Me - WebForge</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#09001f,#160044,#26006b);
+    color:#fff;
+    overflow-x:hidden;
+}
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.35;
+    z-index:-1;
+    animation:float 6s ease-in-out infinite alternate;
+}
+
+body::before{
+    background:#8b5cf6;
+    top:-90px;
+    left:-70px;
+}
+
+body::after{
+    background:#ec4899;
+    right:-80px;
+    bottom:-100px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(35px);
+    }
+}
+
+.topbar{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(0,0,0,.18);
+    border-bottom:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#c084fc;
+}
+
+.back{
+    color:#fff;
+    text-decoration:none;
+    padding:10px 18px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.back:hover{
+    background:#8b5cf6;
+    border-color:#8b5cf6;
+    transform:translateY(-2px);
+}
+
+.container{
+    width:90%;
+    max-width:850px;
+    margin:60px auto;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 17px;
+    border-radius:30px;
+    background:rgba(192,132,252,.12);
+    border:1px solid rgba(192,132,252,.3);
+    color:#d8b4fe;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:44px;
+    margin-bottom:20px;
+}
+
+.intro{
+    max-width:700px;
+    margin:auto;
+    color:#ddd6fe;
+    font-size:16px;
+    line-height:1.7;
+    animation:appear .8s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.card{
+    margin-top:40px;
+    padding:30px;
+    border-radius:25px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(15px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.points{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.point{
+    padding:25px 15px;
+    border-radius:18px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.3s;
+}
+
+.point:hover{
+    transform:translateY(-7px);
+    background:rgba(168,85,247,.12);
+    border-color:#a855f7;
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.point h3{
+    font-size:15px;
+    line-height:1.4;
+}
+
+.request-btn{
+    display:inline-block;
+    margin-top:32px;
+    padding:14px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:bold;
+    background:linear-gradient(90deg,#7c3aed,#db2777);
+    box-shadow:0 10px 30px rgba(124,58,237,.3);
+    transition:.3s;
+}
+
+.request-btn:hover{
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 15px 35px rgba(219,39,119,.35);
+}
+
+@media(max-width:650px){
+    h1{
+        font-size:34px;
+    }
+
+    .points{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .topbar{
+        padding:0 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="logo">Web<span>Forge</span></div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
+</div>
+
+<div class="container">
+
+    <div class="badge">Hire Me</div>
+
+    <h1>WebForge Freelancer</h1>
+
+    <p class="intro">
+        I am a WebForge Freelancer, and I have completed Computer Engineering.
+        I work on freelance projects from home and build professional websites
+        and projects using my technical skills.
+    </p>
+
+    <div class="card">
+
+        <div class="points">
+
+            <div class="point">
+                <div class="icon">🏠</div>
+                <h3>Work From Home Freelancing</h3>
+            </div>
+
+            <div class="point">
+                <div class="icon">💻</div>
+                <h3>Project Development</h3>
+            </div>
+
+            <div class="point">
+                <div class="icon">🌐</div>
+                <h3>Web Development</h3>
+            </div>
+
+        </div>
+
+        <a href="request.html" class="request-btn">
+            Create Your Project Request
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
