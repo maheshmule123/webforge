@@ -741,58 +741,38 @@ nav{
     </div>
 
     <div class="nav-right">
-
         <div class="notification-wrapper">
 
-            <div class="notification"
-                 onclick="showNotifications()"
-                 title="Notifications">
-
+            <div class="notification" onclick="showNotifications()" title="Notifications">
                 🔔
-
-                <span class="notification-count hidden"
-                      id="notificationCount">0</span>
-
+                <span class="notification-count hidden" id="notificationCount">0</span>
             </div>
 
-            <div class="notification-popup"
-                 id="notificationPopup">
+            <div class="notification-popup" id="notificationPopup">
 
                 <div class="notification-header">
                     <h3>Notifications</h3>
-
-                    <span id="notificationHeaderCount">
-                        No new requests
-                    </span>
+                    <span id="notificationHeaderCount">No new requests</span>
                 </div>
 
-                <div class="notification-body"
-                     id="notificationBody">
-
+                <div class="notification-body" id="notificationBody">
                     <div class="notification-empty">
                         Loading notifications...
                     </div>
-
                 </div>
 
                 <div class="notification-footer">
-
-                    <button class="view-requests-btn"
-                            onclick="viewAllRequests()">
+                    <button class="view-requests-btn" onclick="viewAllRequests()">
                         View All Project Requests
                     </button>
-
                 </div>
 
             </div>
-
         </div>
 
-        <button class="logout-btn"
-                onclick="logout()">
+        <button class="logout-btn" onclick="logout()">
             Logout
         </button>
-
     </div>
 </nav>
 
@@ -822,7 +802,6 @@ nav{
         </div>
 
         <div class="hero-visual">
-
             <div class="ring one"></div>
             <div class="ring two"></div>
             <div class="ring three"></div>
@@ -830,7 +809,6 @@ nav{
             <div class="center-logo">
                 W
             </div>
-
         </div>
 
     </section>
@@ -838,188 +816,102 @@ nav{
     <section>
 
         <div class="modules-title">
-
             <h2>WebForge Modules</h2>
-
-            <p>
-                Select a module to continue
-            </p>
-
+            <p>Select a module to continue</p>
         </div>
 
         <div class="modules">
 
-            <a href="services.html"
-               class="module">
-
-                <div class="module-icon">
-                    🛠️
-                </div>
-
-                <h3>
-                    Services
-                </h3>
-
+            <a href="services.html" class="module">
+                <div class="module-icon">🛠️</div>
+                <h3>Services</h3>
                 <p>
                     Explore the professional services offered
                     by WebForge.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
-            <a href="request.html"
-               class="module">
-
-                <div class="module-icon">
-                    📝
-                </div>
-
-                <h3>
-                    Create Your Project
-                </h3>
-
+            <a href="request.html" class="module">
+                <div class="module-icon">📝</div>
+                <h3>Create Your Project</h3>
                 <p>
                     Submit your project requirements and
                     request a website or digital solution.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
-            <a href="project.html"
-               class="module">
-
-                <div class="module-icon">
-                    📁
-                </div>
-
-                <h3>
-                    My Projects
-                </h3>
-
+            <a href="project.html" class="module">
+                <div class="module-icon">📁</div>
+                <h3>My Projects</h3>
                 <p>
                     View completed client projects and
                     their live website links.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
-            <a href="process.html"
-               class="module">
-
-                <div class="module-icon">
-                    🔄
-                </div>
-
-                <h3>
-                    Work Process
-                </h3>
-
+            <a href="process.html" class="module">
+                <div class="module-icon">🔄</div>
+                <h3>Work Process</h3>
                 <p>
                     Understand how WebForge handles projects
                     from request to final delivery.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
-            <a href="hire.html"
-               class="module">
-
-                <div class="module-icon">
-                    👨‍💻
-                </div>
-
-                <h3>
-                    Hire Me
-                </h3>
-
+            <a href="hire.html" class="module">
+                <div class="module-icon">👨‍💻</div>
+                <h3>Hire Me</h3>
                 <p>
                     View professional profile information
                     and connect for your next project.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
-            <a href="request.html"
-               class="module">
-
-                <div class="module-icon">
-                    🚀
-                </div>
-
-                <h3>
-                    Start a Project
-                </h3>
-
+            <a href="request.html" class="module">
+                <div class="module-icon">🚀</div>
+                <h3>Start a Project</h3>
                 <p>
                     Have an idea? Start your project request
                     with WebForge today.
                 </p>
-
-                <span class="module-arrow">
-                    →
-                </span>
-
+                <span class="module-arrow">→</span>
             </a>
 
         </div>
 
     </section>
 
-    <section class="request-panel"
-             id="requestPanel">
+    <section class="request-panel" id="requestPanel">
 
-        <h2>
-            Project Requests
-        </h2>
+        <h2>Project Requests</h2>
 
         <p class="request-panel-sub">
             Requests received through WebForge
         </p>
 
-        <div class="request-list"
-             id="requestList">
-
+        <div class="request-list" id="requestList">
             <div class="loading">
                 Loading project requests...
             </div>
-
         </div>
 
     </section>
 
     <section class="cta">
 
-        <h2>
-            Ready to Build Something?
-        </h2>
+        <h2>Ready to Build Something?</h2>
 
         <p>
             Turn your idea into a professional digital
             experience with WebForge.
         </p>
 
-        <a href="request.html"
-           class="cta-btn">
+        <a href="request.html" class="cta-btn">
             Create Project Request →
         </a>
 
@@ -1027,8 +919,7 @@ nav{
 
 </main>
 
-<div class="toast"
-     id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 const API_URL="https://6cmkqxcivc.execute-api.ap-south-1.amazonaws.com/prod/request";
@@ -1036,18 +927,21 @@ const API_URL="https://6cmkqxcivc.execute-api.ap-south-1.amazonaws.com/prod/requ
 let projectRequests=[];
 
 async function loadProjectRequests(){
-
     const requestList=document.getElementById("requestList");
     const notificationBody=document.getElementById("notificationBody");
 
     try{
-
         const response=await fetch(API_URL,{
             method:"GET",
             headers:{
-                "Content-Type":"application/json"
-            }
+                "Accept":"application/json"
+            },
+            cache:"no-store"
         });
+
+        if(!response.ok){
+            throw new Error("HTTP Error: "+response.status);
+        }
 
         const result=await response.json();
 
@@ -1055,29 +949,23 @@ async function loadProjectRequests(){
 
         let data=result;
 
-        if(result && typeof result.body==="string"){
-
+        if(result&&typeof result.body==="string"){
             try{
                 data=JSON.parse(result.body);
-            }catch(error){
-                console.error("Response body parse error:",error);
+            }catch{
+                data=result.body;
             }
         }
 
-        if(data && Array.isArray(data.requests)){
-
-            projectRequests=data.requests;
-
-        }else if(data && Array.isArray(data.Items)){
-
-            projectRequests=data.Items;
-
-        }else if(Array.isArray(data)){
-
+        if(Array.isArray(data)){
             projectRequests=data;
-
+        }else if(data&&Array.isArray(data.requests)){
+            projectRequests=data.requests;
+        }else if(data&&Array.isArray(data.Items)){
+            projectRequests=data.Items;
+        }else if(data&&data.data&&Array.isArray(data.data)){
+            projectRequests=data.data;
         }else{
-
             projectRequests=[];
         }
 
@@ -1089,6 +977,45 @@ async function loadProjectRequests(){
 
         console.error("AWS Request Error:",error);
 
-        if(requestList){
+        projectRequests=[];
 
+        if(requestList){
             requestList.innerHTML=
+                '<div class="no-request">Unable to load project requests.</div>';
+        }
+
+        if(notificationBody){
+            notificationBody.innerHTML=
+                '<div class="notification-empty">Unable to load notifications.</div>';
+        }
+
+        updateNotificationCount();
+    }
+}
+
+function updateNotificationCount(){
+
+    const count=document.getElementById("notificationCount");
+    const headerCount=document.getElementById("notificationHeaderCount");
+
+    if(!count)return;
+
+    const total=projectRequests.length;
+
+    if(total>0){
+
+        count.textContent=total;
+        count.classList.remove("hidden");
+
+        if(headerCount){
+            headerCount.textContent=
+                total+" new request"+(total===1?"":"s");
+        }
+
+    }else{
+
+        count.textContent="0";
+        count.classList.add("hidden");
+
+        if(headerCount){
+            headerCount.textContent="No new requests";
